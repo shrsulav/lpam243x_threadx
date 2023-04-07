@@ -15,4 +15,5 @@
 	<templateProperties value="id=example.projectspec.hello_world_am243x-lp_r5fss0-0_nortos_ti-arm-clang"/>
 	<origin value="C:\Users\sulavs\Downloads\ti\mcu_plus_sdk_am243x_08_04_00_17\examples\hello_world\am243x-lp\r5fss0-0_nortos\ti-arm-clang\example.projectspec"/>
 	<filesToOpen value=""/>
+	<isTargetManual value="false"/>
 </projectOptions>
