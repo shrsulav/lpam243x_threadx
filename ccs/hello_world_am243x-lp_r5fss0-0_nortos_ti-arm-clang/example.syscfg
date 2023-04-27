@@ -23,7 +23,6 @@ const timer1     = timer.addInstance();
  */
 debug_log.enableUartLog        = true;
 debug_log.uartLog.$name        = "CONFIG_UART_CONSOLE";
-debug_log.uartLog.intrEnable   = "DISABLE";
 debug_log.uartLog.UART.$assign = "USART0";
 
 mpu_armv71.$name             = "CONFIG_MPU_REGION0";

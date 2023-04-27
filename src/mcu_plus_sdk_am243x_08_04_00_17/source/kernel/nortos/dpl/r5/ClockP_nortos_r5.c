@@ -80,6 +80,6 @@ void ClockP_init(void)
     HwiP_construct(&gClockCtrl.timerHwiObj, &timerHwiParams);
 
     /* start the tick timer */
-    // TimerP_start(gClockCtrl.timerBaseAddr);
+    TimerP_start(gClockCtrl.timerBaseAddr);
 }
 
