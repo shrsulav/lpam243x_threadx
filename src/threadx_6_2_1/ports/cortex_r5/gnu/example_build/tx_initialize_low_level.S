@@ -47,6 +47,7 @@ SYS_STACK_SIZE  =       1024                    @ System stack size
     .global     _tx_thread_context_save
     .global     _tx_thread_context_restore
     .global     _tx_timer_interrupt
+    .global     HwiP_irq_handler_c
     .global     _end
     .global     _sp
     .global     _stack_bottom
@@ -241,7 +242,7 @@ __tx_irq_processing_return:
 @       a real system, some kind of status indication would have to be checked
 @       before the timer interrupt handler could be called.  */
 @
-    BL     _tx_timer_interrupt                  @ Timer interrupt handler
+    BL     HwiP_irq_handler_c                  @ Interrupt handler
 @
 @
 @    /* If interrupt nesting was started earlier, the end of interrupt nesting

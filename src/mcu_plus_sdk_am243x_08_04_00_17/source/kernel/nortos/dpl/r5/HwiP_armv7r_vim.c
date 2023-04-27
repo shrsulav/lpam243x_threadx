@@ -153,7 +153,7 @@ int32_t HWI_SECTION HwiP_construct(HwiP_Object *handle, HwiP_Params *params)
     }
     else
     {
-        HwiP_setVecAddr(params->intNum, (uintptr_t)HwiP_irq_handler);
+        HwiP_setVecAddr(params->intNum, (uintptr_t)__tx_irq_handler);
     }
 
     gHwiCtrl.isr[params->intNum] = params->callback;
@@ -189,7 +189,7 @@ void HWI_SECTION HwiP_destruct(HwiP_Object *handle)
     HwiP_setAsFIQ(obj->intNum, 0);
     HwiP_setPri(obj->intNum, HwiP_MAX_PRIORITY-1);
     HwiP_setAsPulse(obj->intNum, 0);
-    HwiP_setVecAddr(obj->intNum, (uintptr_t)HwiP_irq_handler);
+    HwiP_setVecAddr(obj->intNum, (uintptr_t)__tx_irq_handler);
 
     /* clear interrupt data structure */
     gHwiCtrl.isr[obj->intNum] = NULL;
@@ -219,7 +219,7 @@ void HWI_SECTION HwiP_init()
         gHwiCtrl.isrArgs[i] = NULL;
 
         HwiP_setPri(i, 0xF);
-        HwiP_setVecAddr(i, (uintptr_t)HwiP_irq_handler);
+        HwiP_setVecAddr(i, (uintptr_t)__tx_irq_handler);
     }
 
     /* disable, clear, set as IRQ and level, all interrupts */

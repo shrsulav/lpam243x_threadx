@@ -47,6 +47,7 @@
 									<listOptionValue builtIn="false" value="${COM_TI_MCU_PLUS_SDK_AM243X_SYMBOLS}"/>
 									<listOptionValue builtIn="false" value="SOC_AM243X"/>
 									<listOptionValue builtIn="false" value="_DEBUG_=1"/>
+									<listOptionValue builtIn="false" value="TX_ENABLE_IRQ_NESTING"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_2.1.compilerID.MCPU.1710345877" name="Select ARM processor variant (-mcpu)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_2.1.compilerID.MCPU" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_2.1.compilerID.MCPU.cortex-r5" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_2.1.compilerID.MFLOAT_ABI.2047142137" name="Select assumed floating-point ABI (-mfloat-abi)" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_2.1.compilerID.MFLOAT_ABI" useByScannerDiscovery="false" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_2.1.compilerID.MFLOAT_ABI.hard" valueType="enumerated"/>

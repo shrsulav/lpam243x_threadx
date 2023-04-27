@@ -52,7 +52,7 @@ svc_addr: .long HwiP_svc_handler
 prefetch_abort_addr: .long HwiP_prefetch_abort_handler
 data_abort_addr: .long HwiP_data_abort_handler
 reserved_addr: .long HwiP_reserved_handler
-irq_addr: .long HwiP_irq_handler
+irq_addr: .long __tx_irq_handler
 fiq_addr: .long HwiP_fiq_handler
 
 	.end

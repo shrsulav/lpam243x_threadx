@@ -78,6 +78,8 @@ void my_thread_entry(ULONG thread_input)
 
         DebugP_log("\r\nThread 1 Count: %d", thread_counter);
 
+        tx_thread_sleep(200); // sleep for 2 seconds
+
         /* Release the semaphore. */
         status = tx_semaphore_put(&semaphore_1);
 
@@ -103,6 +105,8 @@ void my_thread_entry_2(ULONG thread_input)
         thread_counter++;
 
         DebugP_log("\r\nThread 2 Count: %d", thread_counter);
+
+        tx_thread_sleep(200);  // sleep for 2 seconds
 
         /* Release the semaphore. */
         status = tx_semaphore_put(&semaphore_0);
@@ -141,4 +145,9 @@ void tx_application_define(void *first_unused_memory)
     /* Create the semaphore. */
     tx_semaphore_create(&semaphore_1, "semaphore 1", 0);
 
+}
+
+void start_systick_timer(void)
+{
+    TimerP_start(gTimerBaseAddr[CONFIG_TIMER0]);
 }

@@ -144,6 +144,8 @@ VOID  _tx_initialize_kernel_enter(VOID)
     /* Call any port specific pre-scheduler processing.  */
     TX_PORT_SPECIFIC_PRE_SCHEDULER_INITIALIZATION
 
+    start_systick_timer();
+
 #if defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE)
     /* Initialize Execution Profile Kit.  */
     _tx_execution_initialize();

@@ -15,6 +15,8 @@ const mpu_armv72 = mpu_armv7.addInstance();
 const mpu_armv73 = mpu_armv7.addInstance();
 const mpu_armv74 = mpu_armv7.addInstance();
 const mpu_armv75 = mpu_armv7.addInstance();
+const timer      = scripting.addModule("/kernel/dpl/timer", {}, false);
+const timer1     = timer.addInstance();
 
 /**
  * Write custom configuration values to the imported modules.
@@ -49,6 +51,11 @@ mpu_armv75.baseAddr          = 0x60000000;
 mpu_armv75.size              = 28;
 mpu_armv75.accessPermissions = "Supervisor RD, User RD";
 
+timer1.$name         = "CONFIG_TIMER0";
+timer1.usecPerTick   = 10000;
+timer1.intrPriority  = 0;
+timer1.timerCallback = "_tx_timer_interrupt";
+
 /**
  * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
  * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
@@ -56,3 +63,4 @@ mpu_armv75.accessPermissions = "Supervisor RD, User RD";
  */
 debug_log.uartLog.UART.RXD.$suggestSolution = "ball.B10";
 debug_log.uartLog.UART.TXD.$suggestSolution = "ball.B11";
+timer1.TIMER.$suggestSolution               = "DMTIMER0";

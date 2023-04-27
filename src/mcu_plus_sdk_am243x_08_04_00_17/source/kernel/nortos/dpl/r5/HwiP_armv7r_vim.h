@@ -89,6 +89,7 @@ void HwiP_enableVIC();
 
 void HwiP_fiq_handler(void);
 void HwiP_irq_handler(void);
+void __tx_irq_handler(void);
 
 
 static inline void  HWI_SECTION HwiP_setAsFIQ(uint32_t intNum, uint32_t isFIQ)
