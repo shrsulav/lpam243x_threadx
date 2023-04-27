@@ -271,5 +271,5 @@ uint32_t HWI_SECTION HwiP_inISR(void)
 {
     uint32_t mode = (HwiP_getCPSR() & 0x1F);
 
-    return (uint32_t)(mode != ARMV7R_SYSTEM_MODE);
+    return (uint32_t)(mode != ARMV7R_SVC_MODE);
 }
