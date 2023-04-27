@@ -1,6 +1,12 @@
 eclipse.preferences.version=1
 encoding//Debug/makefile=UTF-8
 encoding//Debug/objects.mk=UTF-8
+encoding//Debug/source/threadx_6_2_1/common/src/subdir_rules.mk=UTF-8
+encoding//Debug/source/threadx_6_2_1/common/src/subdir_vars.mk=UTF-8
+encoding//Debug/source/threadx_6_2_1/ports/cortex_r5/gnu/src/subdir_rules.mk=UTF-8
+encoding//Debug/source/threadx_6_2_1/ports/cortex_r5/gnu/src/subdir_vars.mk=UTF-8
+encoding//Debug/source/threadx_6_2_1/ports/cortex_r5/gnu/subdir_rules.mk=UTF-8
+encoding//Debug/source/threadx_6_2_1/ports/cortex_r5/gnu/subdir_vars.mk=UTF-8
 encoding//Debug/sources.mk=UTF-8
 encoding//Debug/subdir_rules.mk=UTF-8
 encoding//Debug/subdir_vars.mk=UTF-8

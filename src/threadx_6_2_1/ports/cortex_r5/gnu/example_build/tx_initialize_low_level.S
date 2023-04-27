@@ -50,7 +50,10 @@ SYS_STACK_SIZE  =       1024                    @ System stack size
     .global     _end
     .global     _sp
     .global     _stack_bottom
-
+@
+@
+	c_UNDEFINED_STACK_END: .long __UNDEFINED_STACK_END
+	c_SVC_STACK_END: .long __SVC_STACK_END
 @
 @
 @/* Define the 16-bit Thumb mode veneer for _tx_initialize_low_level for
@@ -124,52 +127,53 @@ _tx_initialize_low_level:
 @
 @    /* Setup various stack pointers.  */
 @
-    LDR     r1, =_sp                            @ Get pointer to stack area
+@    LDR     r1, =_sp                            @ Get pointer to stack area
 
-#ifdef TX_ENABLE_IRQ_NESTING 
-@
-@    /* Setup the system mode stack for nested interrupt support  */
-@
-    LDR     r2, =SYS_STACK_SIZE                 @ Pickup stack size
-    MOV     r3, #SYS_MODE                       @ Build SYS mode CPSR
-    MSR     CPSR_c, r3                          @ Enter SYS mode
-    SUB     r1, r1, #1                          @ Backup 1 byte
-    BIC     r1, r1, #7                          @ Ensure 8-byte alignment
-    MOV     sp, r1                              @ Setup SYS stack pointer
-    SUB     r1, r1, r2                          @ Calculate start of next stack
-#endif
+@ #ifdef TX_ENABLE_IRQ_NESTING
+@ @
+@ @    /* Setup the system mode stack for nested interrupt support  */
+@ @
+@     LDR     r2, =SYS_STACK_SIZE                 @ Pickup stack size
+@     MOV     r3, #SYS_MODE                       @ Build SYS mode CPSR
+@     MSR     CPSR_c, r3                          @ Enter SYS mode
+@     SUB     r1, r1, #1                          @ Backup 1 byte
+@     BIC     r1, r1, #7                          @ Ensure 8-byte alignment
+@     MOV     sp, r1                              @ Setup SYS stack pointer
+@     SUB     r1, r1, r2                          @ Calculate start of next stack
+@ #endif
 
-    LDR     r2, =FIQ_STACK_SIZE                 @ Pickup stack size
-    MOV     r0, #FIQ_MODE                       @ Build FIQ mode CPSR
-    MSR     CPSR, r0                            @ Enter FIQ mode
-    SUB     r1, r1, #1                          @ Backup 1 byte
-    BIC     r1, r1, #7                          @ Ensure 8-byte alignment
-    MOV     sp, r1                              @ Setup FIQ stack pointer
-    SUB     r1, r1, r2                          @ Calculate start of next stack
-    LDR     r2, =IRQ_STACK_SIZE                 @ Pickup IRQ stack size
-    MOV     r0, #IRQ_MODE                       @ Build IRQ mode CPSR
-    MSR     CPSR, r0                            @ Enter IRQ mode
-    SUB     r1, r1, #1                          @ Backup 1 byte
-    BIC     r1, r1, #7                          @ Ensure 8-byte alignment
-    MOV     sp, r1                              @ Setup IRQ stack pointer
-    SUB     r3, r1, r2                          @ Calculate end of IRQ stack
-    MOV     r0, #SVC_MODE                       @ Build SVC mode CPSR
-    MSR     CPSR, r0                            @ Enter SVC mode
-    LDR     r2, =_stack_bottom                  @ Pickup stack bottom
-    CMP     r3, r2                              @ Compare the current stack end with the bottom
-_stack_error_loop:                  
-    BLT     _stack_error_loop                   @ If the IRQ stack exceeds the stack bottom, just sit here!
+@     LDR     r2, =FIQ_STACK_SIZE                 @ Pickup stack size
+@     MOV     r0, #FIQ_MODE                       @ Build FIQ mode CPSR
+@     MSR     CPSR, r0                            @ Enter FIQ mode
+@     SUB     r1, r1, #1                          @ Backup 1 byte
+@     BIC     r1, r1, #7                          @ Ensure 8-byte alignment
+@     MOV     sp, r1                              @ Setup FIQ stack pointer
+@     SUB     r1, r1, r2                          @ Calculate start of next stack
+@     LDR     r2, =IRQ_STACK_SIZE                 @ Pickup IRQ stack size
+@     MOV     r0, #IRQ_MODE                       @ Build IRQ mode CPSR
+@     MSR     CPSR, r0                            @ Enter IRQ mode
+@     SUB     r1, r1, #1                          @ Backup 1 byte
+@     BIC     r1, r1, #7                          @ Ensure 8-byte alignment
+@     MOV     sp, r1                              @ Setup IRQ stack pointer
+@     SUB     r3, r1, r2                          @ Calculate end of IRQ stack
+@     MOV     r0, #SVC_MODE                       @ Build SVC mode CPSR
+@     MSR     CPSR, r0                            @ Enter SVC mode
+@     LDR     r2, =_stack_bottom                  @ Pickup stack bottom
+@     CMP     r3, r2                              @ Compare the current stack end with the bottom
+@ _stack_error_loop:
+@     BLT     _stack_error_loop                   @ If the IRQ stack exceeds the stack bottom, just sit here!
 @
 @    /* Save the system stack pointer.  */
 @    _tx_thread_system_stack_ptr = (VOID_PTR) (sp);
 @
+    LDR     r1, c_SVC_STACK_END                 @ Get top of SVC stack
     LDR     r2, =_tx_thread_system_stack_ptr    @ Pickup stack pointer
     STR     r1, [r2]                            @ Save the system stack
 @
 @    /* Save the first available memory address.  */
 @    _tx_initialize_unused_memory =  (VOID_PTR) _end;
 @
-    LDR     r1, =_end                           @ Get end of non-initialized RAM area
+    LDR     r1, c_UNDEFINED_STACK_END           @ Get end of non-initialized RAM area
     LDR     r2, =_tx_initialize_unused_memory   @ Pickup unused memory ptr address
     ADD     r1, r1, #8                          @ Increment to next free word
     STR     r1, [r2]                            @ Save first free memory address

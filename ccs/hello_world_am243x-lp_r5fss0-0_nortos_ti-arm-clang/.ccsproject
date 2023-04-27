@@ -15,4 +15,5 @@
 	<templateProperties value="id=example.projectspec.hello_world_am243x-lp_r5fss0-0_nortos_ti-arm-clang"/>
 	<origin value="C:\Users\sulavs\Downloads\personal\lpam243x_threadx\src\hello_world\am243x-lp\r5fss0-0_nortos\ti-arm-clang\example.projectspec"/>
 	<filesToOpen value=""/>
+	<isTargetManual value="false"/>
 </projectOptions>
